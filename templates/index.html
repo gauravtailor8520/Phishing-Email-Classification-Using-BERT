@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Detector</title>
+    <style>
+        /* General Page Style with Background Image */
+        body {
+            background-image: url('https://i.postimg.cc/xCwY7psX/cybersecurity-tips-1200-627.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Adding a Dark Overlay to Make Text More Legible */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            z-index: -1;
+        }
+
+        /* Title Style */
+        h1 {
+            color: #3399ff;
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        /* Form and Text Area Style */
+        #predict-form {
+            width: 80%;
+            max-width: 600px;
+            background-color: #3c3c3c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            color: #bbbbbb;
+            font-size: 1.1em;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            resize: none;
+            font-size: 1em;
+            color: #ffffff;
+            background-color: #2b2b2b;
+        }
+
+        /* Button Style */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3399ff;
+            color: #ffffff;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1a75d1;
+        }
+
+        /* Result Style */
+        #result {
+            color: #ff6666;
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Additional Instruction Text */
+        .instruction {
+            color: #bbbbbb;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        /* Legitimate and Phishing Colors */
+        .legitimate { color: #00ff00; }
+        .phishing { color: #ff3333; }
+    </style>
+</head>
+<body>
+    <h1>Check Email</h1>
+    <p class="instruction">
+        Paste the content of an email below to verify if it is 
+        <span class="legitimate">legitimate</span> or <span class="phishing">phishing</span>.
+    </p>
+    <form id="predict-form">
+        <textarea id="text" placeholder="Paste email content here..."></textarea><br><br>
+        <button type="button" onclick="predict()">Predict</button>
+    </form>
+    <h2 id="result"></h2>
+
+    <script>
+        function predict() {
+            const text = document.getElementById('text').value;
+            fetch('/predict', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: text})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = 'Prediction: ' + data.prediction;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
