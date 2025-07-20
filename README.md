@@ -1,4 +1,4 @@
-# Email Spam Classification: Detecting Spam Emails
+# Spam Classification: Detecting Spam Emails
 
 ## Overview
 
@@ -113,10 +113,31 @@ In this project, we classified emails into spam and non-spam categories using Ti
 - **Figure 3**: DistilBERT Training and Validation Loss over Epochs
 - **Figure 4**: DistilBERT Classification Report
 
-
 ## Setup Instructions
 
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/your-username/email-spam-classification.git
    cd email-spam-classification
+   ```
+
+## Usage
+
+To use the trained models for email spam classification, follow these steps:
+
+1. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Run the inference script:
+   ```bash
+   python inference.py --model distilbert --email "email text here"
+   ```
+
+## Contributing
+
+Contributions are welcome! Please submit a pull request or open an issue to discuss proposed changes.
+
+## License
+
+This project is licensed under the MIT License.
